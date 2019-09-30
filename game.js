@@ -5,6 +5,16 @@ var userClickedPattern = [];
 var level = 0;
 var started = false;
 
+
+//added possible touch function?
+$(document).ontouchstart(function() {
+    if (!started) {
+        $("#level-title").text("Level " + level);
+        nextSequence();
+        started = true;
+    }
+});
+
 $(document).keydown(function() {
     if (!started) {
         $("#level-title").text("Level " + level);
