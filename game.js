@@ -5,22 +5,28 @@ var userClickedPattern = [];
 var level = 0;
 var started = false;
 
+var clickEvent = (function() {
+    if ("ontouchstart" in document.documentElement === true) {
+        return "ontouchstart";
+    }
 
-//added possible touch function?
-//$(document).keydown(function() {
-    //if (!started) {
-        //$("#level-title").text("Level " + level);
-        //nextSequence();
-        //started = true;
-    //}
-//});
+    return "keydown";
+})();
 
-$(".btn").click(function() {
-    var userChosenColour = $(this).attr("id");
-    userClickedPattern.push(userChosenColour);
-    playSound(userChosenColour);
-    animatePress(userChosenColour);
-    checkAnswer(userClickedPattern.length - 1);
+document.addEventListener(clickEvent, function() {
+    if (!started) {
+        $("#level-title").text("Level " + level);
+        nextSequence();
+        started = true;
+
+        $(".btn").click(function() {
+            var userChosenColour = $(this).attr("id");
+            userClickedPattern.push(userChosenColour);
+            playSound(userChosenColour);
+            animatePress(userChosenColour);
+            checkAnswer(userClickedPattern.length - 1);
+        });
+    }
 });
 
 function nextSequence() {
