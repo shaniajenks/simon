@@ -7,21 +7,13 @@ var started = false;
 
 
 //added possible touch function?
-$(document).ontouchstart(function() {
-    if (!started) {
-        $("#level-title").text("Level " + level);
-        nextSequence();
-        started = true;
-    }
-});
-
-$(document).keydown(function() {
-    if (!started) {
-        $("#level-title").text("Level " + level);
-        nextSequence();
-        started = true;
-    }
-});
+//$(document).keydown(function() {
+    //if (!started) {
+        //$("#level-title").text("Level " + level);
+        //nextSequence();
+        //started = true;
+    /}
+//});
 
 $(".btn").click(function() {
     var userChosenColour = $(this).attr("id");
