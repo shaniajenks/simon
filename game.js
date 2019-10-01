@@ -1,17 +1,21 @@
-//alert("working");
 var buttonColours = ["red", "blue", "green", "yellow"];
 var gamePattern = [];
 var userClickedPattern = [];
 var level = 0;
 var started = false;
 
+var helpLabel = "Press A Key to";
+
 var clickEvent = (function() {
     if ("ontouchstart" in document.documentElement === true) {
+        helpLabel = "Touch to"
         return "touchstart";
     }
 
     return "keydown";
 })();
+
+$("#level-title").text(helpLabel + " Start");
 
 document.addEventListener(clickEvent, function(e) {
     if (!started) {
@@ -69,7 +73,7 @@ function checkAnswer(currentPattern) {
         setTimeout(function() {
             $("body").removeClass("game-over");
         }, 200);
-        $("#level-title").text("Game Over, Press Any Key to Restart");
+        $("#level-title").text("Game Over, " + helpLabel + " Restart");
         startOver();
     }
 }
