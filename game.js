@@ -7,25 +7,27 @@ var started = false;
 
 var clickEvent = (function() {
     if ("ontouchstart" in document.documentElement === true) {
-        return "ontouchstart";
+        return "touchstart";
     }
 
     return "keydown";
 })();
 
-document.addEventListener(clickEvent, function() {
+document.addEventListener(clickEvent, function(e) {
     if (!started) {
         $("#level-title").text("Level " + level);
-        nextSequence();
         started = true;
 
-        $(".btn").click(function() {
-            var userChosenColour = $(this).attr("id");
-            userClickedPattern.push(userChosenColour);
-            playSound(userChosenColour);
-            animatePress(userChosenColour);
-            checkAnswer(userClickedPattern.length - 1);
-        });
+        setTimeout(function() {
+            nextSequence();
+            $(".btn").click(function() {
+                var userChosenColour = $(this).attr("id");
+                userClickedPattern.push(userChosenColour);
+                playSound(userChosenColour);
+                animatePress(userChosenColour);
+                checkAnswer(userClickedPattern.length - 1);
+            });
+        }, 500)
     }
 });
 
